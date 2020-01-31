@@ -1,27 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback, useEffect } from 'react';
+import * as api from './api';
 
 const StateContext = React.createContext();
 
-const mockFontFamilyGroups = {
-  "Arial, Times New Roman": [1, 2, 3],
-  "Helvetica, consolas": [5]
-};
-
 export const StateContextProvider = ({ children }) => {
   const [selectedFont, setSelectedFont] = useState(null);
-  const [fontFamilyGroups, setFontFamilyGroups] = useState(
-    mockFontFamilyGroups
-  );
+  const [fontFamilies, setFontFamilies] = useState(['A', 'b']);
+
+  useEffect(() => {
+    api.getFontFamilies().then((a) => console.log(a) || setFontFamilies(a));
+  }, []);
+
+  const replaceFontFamily = useCallback((originalFont, newFont) => {
+    api.replaceFontFamily(originalFont, newFont);
+  }, []);
 
   const value = {
-    fontFamilyGroups,
+    fontFamilies,
     selectedFont,
+    replaceFontFamily,
     setSelectedFont
   };
 
-  return (
-    <StateContext.Provider value={value}>{children}</StateContext.Provider>
-  );
+  return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };
 
 export const useAppState = () => useContext(StateContext);

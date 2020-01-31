@@ -1,19 +1,15 @@
-import React from "react";
-import styles from "./styles.module.css";
-import { useAppState } from "../../state";
+import React from 'react';
+import styles from './styles.module.css';
+import { useAppState } from '../../state';
 
 const PageFonts = () => {
-  const { fontFamilyGroups, setSelectedFont } = useAppState();
-  const fontFamilies = Object.keys(fontFamilyGroups);
+  const { fontFamilies, setSelectedFont } = useAppState();
 
   return (
     <div>
       <ul className={styles.pageFontsList}>
-        {fontFamilies.map(fontFamily => (
-          <li
-            className={styles.pageFont}
-            onClick={() => setSelectedFont(fontFamily)}
-          >
+        {fontFamilies.map((fontFamily) => (
+          <li className={styles.pageFont} onClick={() => setSelectedFont(fontFamily)}>
             {fontFamily}
           </li>
         ))}

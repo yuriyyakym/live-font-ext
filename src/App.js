@@ -1,7 +1,7 @@
-import React from "react";
-import { useAppState } from "./state";
-import FontConfiguration from "./modules/font-configuration";
-import PageFonts from "./modules/page-fonts";
+import React from 'react';
+import { useAppState } from './state';
+import FontConfiguration from './modules/font-configuration';
+import PageFonts from './modules/page-fonts';
 
 function App() {
   const { selectedFont } = useAppState();

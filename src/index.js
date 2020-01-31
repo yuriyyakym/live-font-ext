@@ -1,8 +1,8 @@
-import React from "react";
-import { render } from "react-snapshot";
-import { StateContextProvider } from "./state";
-import App from "./App";
-import "./index.css";
+import React from 'react';
+import { render } from 'react-snapshot';
+import { StateContextProvider } from './state';
+import App from './App';
+import './index.css';
 
 const app = (
   <StateContextProvider>
@@ -10,4 +10,4 @@ const app = (
   </StateContextProvider>
 );
 
-render(app, document.getElementById("root"));
+render(app, document.getElementById('root'));
