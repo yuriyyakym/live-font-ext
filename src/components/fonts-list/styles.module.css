@@ -1,0 +1,17 @@
+.list {
+  overflow-x: hidden !important;
+}
+
+.fontRow {
+  padding-left: 30px;
+  line-height: 45px;
+  font-size: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.fontRow:hover {
+  background-color: rgba(0, 208, 255, 0.1);
+}

@@ -5,7 +5,7 @@ const StateContext = React.createContext();
 
 export const StateContextProvider = ({ children }) => {
   const [selectedFont, setSelectedFont] = useState(null);
-  const [fontFamilies, setFontFamilies] = useState(['A', 'b']);
+  const [fontFamilies, setFontFamilies] = useState(['Not yet loaded']);
 
   useEffect(() => {
     api.getFontFamilies().then((a) => console.log(a) || setFontFamilies(a));
