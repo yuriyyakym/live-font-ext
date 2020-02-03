@@ -6,8 +6,14 @@
       .filter((element) => element.nodeType === 3 || element.nodeType === 1)
       .reduce((result, element) => {
         const fontFamily = getComputedStyle(element)['font-family'];
-        result[fontFamily] = result[fontFamily] || [];
-        result[fontFamily].push(element);
+        const parentFontFamily =
+          element.parentElement && getComputedStyle(element.parentElement)['font-family'];
+
+        if (fontFamily !== parentFontFamily) {
+          result[fontFamily] = result[fontFamily] || [];
+          result[fontFamily].push(element);
+        }
+
         return result;
       }, {});
   };
