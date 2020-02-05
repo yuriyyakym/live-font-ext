@@ -1,0 +1,13 @@
+.button .activeText {
+  display: none;
+}
+
+.button:hover .text,
+.button.isActive .text {
+  display: none;
+}
+
+.button:hover .activeText,
+.button.isActive .activeText {
+  display: inline;
+}

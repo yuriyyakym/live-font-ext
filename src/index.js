@@ -1,13 +1,16 @@
 import React from 'react';
 import { render } from 'react-snapshot';
-import { StateContextProvider } from './state';
+import { AppStateContextProvider } from './state/app';
+import { FavoritesContextProvider } from './state/favorites';
 import App from './App';
 import './index.css';
 
 const app = (
-  <StateContextProvider>
-    <App />
-  </StateContextProvider>
+  <FavoritesContextProvider>
+    <AppStateContextProvider>
+      <App />
+    </AppStateContextProvider>
+  </FavoritesContextProvider>
 );
 
 render(app, document.getElementById('root'));

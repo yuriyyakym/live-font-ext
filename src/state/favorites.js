@@ -1,5 +1,4 @@
 import React, { useContext, useState, useCallback, useEffect } from 'react';
-import * as api from './api';
 
 const FavoritesContext = React.createContext();
 
@@ -7,7 +6,7 @@ export const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = useCallback((font) => {
-    setFavorites((favorites) => [...favorites]);
+    setFavorites((favorites) => [...favorites, font]);
   }, []);
 
   const value = {

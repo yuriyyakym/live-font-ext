@@ -1,23 +1,31 @@
 import React, { useCallback } from 'react';
-import { useAppState } from '../../../state';
+import { useAppState } from '../../../state/app';
+import { useFavorites } from '../../../state/favorites';
 import { useFontSearch } from './state';
-import FontsList from '../../../components/fonts-list';
+import FontsList from './fonts-list';
 import styles from './styles.module.css';
 
 const SearchFont = () => {
-  const { selectedFont, replaceFontFamily } = useAppState();
+  const { selectedFont, changeFontFamily } = useAppState();
+  const { favorites, addToFavorites } = useFavorites();
   const { fonts } = useFontSearch();
 
-  const onChange = useCallback(
+  const onSelect = useCallback(
     (font) => {
-      replaceFontFamily(selectedFont, font.family);
+      changeFontFamily(selectedFont, font);
     },
-    [selectedFont, replaceFontFamily]
+    [selectedFont, changeFontFamily]
   );
 
   return (
     <div className={styles.serachFont}>
-      <FontsList height={300} fonts={fonts} onChange={onChange} />
+      <FontsList
+        height={300}
+        fonts={fonts}
+        favorites={favorites}
+        onSelect={onSelect}
+        onAddToFavorites={addToFavorites}
+      />
     </div>
   );
 };

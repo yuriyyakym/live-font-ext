@@ -18,20 +18,19 @@
 
   const fontFamilyGroups = fetchFontFamilyGroups();
 
-  const loadFont = (newFontFamily) => {
-    const fontFamily = newFontFamily.replace(/ /g, '+');
+  const loadFont = (fontDetails) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
-    link.setAttribute('href', `https://fonts.googleapis.com/css?family=${fontFamily}`);
+    link.setAttribute('href', fontDetails.styleSrc);
     document.head.appendChild(link);
   };
 
-  const replaceFont = (originalFont, newFontFamily) => {
+  const replaceFont = (fontFamily, newFontDetails) => {
     // const fontFamilyGroups = fetchFontFamilyGroups();
-    loadFont(newFontFamily);
-    for (const element of fontFamilyGroups[originalFont]) {
-      element.style.fontFamily = newFontFamily;
+    loadFont(newFontDetails);
+    for (const element of fontFamilyGroups[fontFamily]) {
+      element.style.fontFamily = newFontDetails.fontFamily;
     }
   };
 
@@ -48,6 +47,12 @@
         const { fontFamily, newFontDetails } = payload;
         replaceFont(fontFamily, newFontDetails);
         sendResponse({ success: true });
+        return;
+
+      case 'live-font::highlight-font-family-elements':
+        return;
+
+      case 'live-font::unhighlight-font-family-elements':
         return;
     }
   });
