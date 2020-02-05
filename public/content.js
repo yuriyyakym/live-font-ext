@@ -1,6 +1,4 @@
 (() => {
-  // let a;
-
   const fetchFontFamilyGroups = () => {
     return Array.from(document.querySelectorAll('*'))
       .filter((element) => element.nodeType === 3 || element.nodeType === 1)
@@ -46,9 +44,9 @@
         sendResponse({ data: fontFamilies, success: true });
         return;
 
-      case 'live-font::replace-font-family':
-        const { originalFont, newFont } = payload;
-        replaceFont(originalFont, newFont);
+      case 'live-font::change-font':
+        const { fontFamily, newFontDetails } = payload;
+        replaceFont(fontFamily, newFontDetails);
         sendResponse({ success: true });
         return;
     }

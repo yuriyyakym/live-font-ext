@@ -22,13 +22,13 @@ export const getFontFamilies = () =>
     });
   });
 
-export const replaceFontFamily = (originalFont, newFont) =>
+export const replaceFontFamily = (fontFamily, newFontDetails) =>
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {
-      action: 'live-font::replace-font-family',
+      action: 'live-font::change-font',
       payload: {
-        originalFont,
-        newFont
+        fontFamily,
+        newFontDetails
       }
     });
   });
