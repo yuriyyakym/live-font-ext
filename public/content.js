@@ -1,4 +1,27 @@
 (() => {
+  const initCss = () => {
+    const sheet = new CSSStyleSheet();
+    const css = `
+      @keyframes lfe-color-blinking {
+        30% {
+          color: #03588C;
+        }
+        45% {
+          color: #dedede;
+        }
+        60% {
+          color: #A67153;
+        }
+      }
+
+      .lfe-text-highlight {
+        animation: lfe-color-blinking 1s linear infinite;
+      }
+    `;
+    sheet.replaceSync(css);
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+  };
+
   const fetchFontFamilyGroups = () => {
     return Array.from(document.querySelectorAll('*'))
       .filter((element) => element.nodeType === 3 || element.nodeType === 1)
@@ -34,6 +57,20 @@
     }
   };
 
+  const highlightFontFamilyElements = (fontFamily) => {
+    for (const element of fontFamilyGroups[fontFamily]) {
+      element.classList.add('lfe-text-highlight');
+    }
+  };
+
+  const unhighlightFontFamilyElements = (fontFamily) => {
+    for (const element of fontFamilyGroups[fontFamily]) {
+      element.classList.remove('lfe-text-highlight');
+    }
+  };
+
+  initCss();
+
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const { action, payload } = request;
 
@@ -44,15 +81,16 @@
         return;
 
       case 'live-font::change-font':
-        const { fontFamily, newFontDetails } = payload;
-        replaceFont(fontFamily, newFontDetails);
+        replaceFont(payload.fontFamily, payload.newFontDetails);
         sendResponse({ success: true });
         return;
 
       case 'live-font::highlight-font-family-elements':
+        highlightFontFamilyElements(payload.fontFamily);
         return;
 
       case 'live-font::unhighlight-font-family-elements':
+        unhighlightFontFamilyElements(payload.fontFamily);
         return;
     }
   });

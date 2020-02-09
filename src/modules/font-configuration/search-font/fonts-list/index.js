@@ -9,7 +9,7 @@ const FontsList = ({ fonts, height, onSelect, onAddToFavorites }) => (
       const font = fonts[index];
       return (
         <div
-          style={{ ...style, fontFamily: font.family }}
+          style={{ ...style, fontFamily: font.fontFamily }}
           className={styles.fontRow}
           onClick={() => onSelect(font)}>
           {font.fontFamily}

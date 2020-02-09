@@ -24,13 +24,32 @@ export const getFontFamilies = () =>
   });
 
 export const changeFontFamily = (fontFamily, newFontDetails) =>
-  console.log(newFontDetails) ||
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {
       action: 'live-font::change-font',
       payload: {
         fontFamily,
         newFontDetails
+      }
+    });
+  });
+
+export const highlightFontFamilyElements = (fontFamily) =>
+  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      action: 'live-font::highlight-font-family-elements',
+      payload: {
+        fontFamily
+      }
+    });
+  });
+
+export const unhighlightFontFamilyElements = (fontFamily) =>
+  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      action: 'live-font::unhighlight-font-family-elements',
+      payload: {
+        fontFamily
       }
     });
   });

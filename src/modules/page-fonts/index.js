@@ -3,7 +3,13 @@ import { useAppState } from '../../state/app';
 import styles from './styles.module.css';
 
 const PageFonts = () => {
-  const { fontFamilies, changedFontFamilies, setSelectedFont } = useAppState();
+  const {
+    fontFamilies,
+    changedFontFamilies,
+    setSelectedFont,
+    highlightFontFamilyElements,
+    unhighlightFontFamilyElements
+  } = useAppState();
 
   return (
     <div>
@@ -11,7 +17,11 @@ const PageFonts = () => {
         {fontFamilies.map((fontFamily) => {
           const newFont = changedFontFamilies[fontFamily];
           return (
-            <li className={styles.pageFont} onClick={() => setSelectedFont(fontFamily)}>
+            <li
+              className={styles.pageFont}
+              onClick={() => setSelectedFont(fontFamily)}
+              onMouseEnter={() => highlightFontFamilyElements(fontFamily)}
+              onMouseLeave={() => unhighlightFontFamilyElements(fontFamily)}>
               {fontFamily} {newFont && <span>- {newFont.fontFamily}</span>}
             </li>
           );

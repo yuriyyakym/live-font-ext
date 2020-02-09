@@ -9,7 +9,7 @@ export const AppStateContextProvider = ({ children }) => {
   const [fontFamilies, setFontFamilies] = useState(['Not yet loaded']);
 
   useEffect(() => {
-    api.getFontFamilies().then((a) => console.log(a) || setFontFamilies(a));
+    api.getFontFamilies().then(setFontFamilies);
   }, []);
 
   const changeFontFamily = useCallback((fontFamily, newFontDetails) => {
@@ -25,7 +25,9 @@ export const AppStateContextProvider = ({ children }) => {
     changedFontFamilies,
     selectedFont,
     changeFontFamily,
-    setSelectedFont
+    setSelectedFont,
+    highlightFontFamilyElements: api.highlightFontFamilyElements,
+    unhighlightFontFamilyElements: api.unhighlightFontFamilyElements
   };
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;
